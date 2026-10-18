@@ -11,7 +11,7 @@ Add your HDHomeRun under **Dashboard → Live TV → Tuner Devices**.
 Open **Dashboard → Plugins → Repositories** and add this repository URL:
 
 ```text
-https://raw.githubusercontent.com/aober420/jellyfin-hdhomerun-free-guide/main/manifest.json
+https://raw.githubusercontent.com/aober420/hdhomerun-free-guide/main/manifest.json
 ```
 
 Install **HDHomeRun Free Guide** from the plugin catalog and restart Jellyfin.

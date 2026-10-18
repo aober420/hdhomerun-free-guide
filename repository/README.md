@@ -3,7 +3,7 @@
 Add this URL under Jellyfin Dashboard → Plugins → Repositories:
 
 ```text
-https://raw.githubusercontent.com/aober420/jellyfin-hdhomerun-free-guide/main/manifest.json
+https://raw.githubusercontent.com/aober420/hdhomerun-free-guide/main/manifest.json
 ```
 
 The catalog's version history is stored directly in `manifest.json`, newest first.

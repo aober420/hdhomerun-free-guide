@@ -1,4 +1,4 @@
-<p align="center"><img src="assets/logo.png" alt="HDHomeRun Free Guide logo" width="180"></p>
+<p align="center"><img src="assets/banner.png" alt="HDHomeRun Free Guide" width="100%"></p>
 
 # HDHomeRun Free Guide
 

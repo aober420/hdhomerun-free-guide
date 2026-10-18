@@ -28,7 +28,7 @@
         "version": "1.0.0.0"
       }
     ],
-    "imageUrl": "https://raw.githubusercontent.com/aober420/hdhomerun-free-guide/main/assets/logo.png",
+    "imageUrl": "https://raw.githubusercontent.com/aober420/hdhomerun-free-guide/main/assets/plugin-card.png",
     "description": "Automatic HDHomeRun XMLTV guide using tuner authorization. No email required.",
     "owner": "aober420",
     "guid": "94079c51-6e85-4483-8b34-85b162638f75",

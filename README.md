@@ -21,3 +21,7 @@ The plugin downloads the guide on startup and adds it to Live TV. After that, it
 If Jellyfin can't find your tuner, enter its address under **Plugins → HDHomeRun Free Guide**. Make sure it's also added under Live TV. Disable any other HDHomeRun guide plugin before using this one.
 
 Built for Jellyfin 12.1.
+
+## License
+
+Copyright (c) 2026 aober420 (Aober). Plugin source is licensed under **GPL-3.0-only**. See [LICENSE](LICENSE) and [NOTICE](NOTICE). Third-party components retain their respective licenses.

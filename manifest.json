@@ -9,12 +9,12 @@
         "timestamp": "2026-10-05T14:45:49.5481024Z",
         "checksum": "ae71b11732fe32c5e1c4cc8c858a22d5",
         "targetAbi": "12.1.0.0",
-        "changelog": "## ✨ New Features\n\n- **Force download:** Run **Force Download HDHomeRun Free Guide** under Scheduled Tasks to fetch fresh guide data immediately after scanning for channels on your HDHomeRun.\n\n## 🎨 Improvements\n\n- **Automatic refresh:** A successful force download also refreshes the Jellyfin guide and schedules the next background download."
+        "changelog": "## ✨ New Features\n\n- **Force download:** Run **Force Download HDHomeRun Free Guide** under Scheduled Tasks to fetch fresh guide data immediately after scanning for channels on your HDHomeRun.\n\n## ⚙️ Improvements\n\n- **Automatic refresh:** A successful force download also refreshes the Jellyfin guide and schedules the next background download."
       },
       {
         "sourceUrl": "https://github.com/aober420/hdhomerun-free-guide/releases/download/v1.0.1/HDHomeRunFreeGuide_1.0.1.0.zip",
         "checksum": "b959911b35fb6f34adec0382629d0f04",
-        "changelog": "## 🎨 Improvements\n\n- **Clearer download errors:** Show the HTTP status when SiliconDust rejects a guide request.\n- **Request headers:** Identify the plugin and specify accepted content in guide requests.\n\n## 🐛 Bug Fixes\n\n- **Missing guide provider:** Resolved an issue where a saved guide wasn't registered when the next download wasn't due.",
+        "changelog": "## ⚙️ Improvements\n\n- **Clearer download errors:** Show the HTTP status when SiliconDust rejects a guide request.\n- **Request headers:** Identify the plugin and specify accepted content in guide requests.\n\n## 🐛 Bug Fixes\n\n- **Missing guide provider:** Resolved an issue where a saved guide wasn't registered when the next download wasn't due.",
         "targetAbi": "12.1.0.0",
         "timestamp": "2026-10-05T06:47:10.7223058Z",
         "version": "1.0.1.0"

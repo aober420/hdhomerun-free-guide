@@ -4,6 +4,14 @@
     "name": "HDHomeRun Free Guide",
     "versions": [
       {
+        "version": "1.0.3.0",
+        "sourceUrl": "https://github.com/aober420/hdhomerun-free-guide/releases/download/v1.0.3/HDHomeRunFreeGuide_1.0.3.0.zip",
+        "timestamp": "2026-11-10T04:55:05.5634733Z",
+        "checksum": "aafed9266c7e6a3a99b3dcdebf83e118",
+        "targetAbi": "12.1.0.0",
+        "changelog": "## ⚙️ Improvements\n\n- **Fresh guide imports:** Both force downloads and scheduled downloads clear this guide provider's cache before Jellyfin imports the updated listings.\n\n## 🐛 Bug Fixes\n\n- **Outdated listings:** Resolved an issue where Jellyfin could reuse an older cached guide after a successful download, leaving new channels or programs missing."
+      },
+      {
         "version": "1.0.2.0",
         "sourceUrl": "https://github.com/aober420/hdhomerun-free-guide/releases/download/v1.0.2/HDHomeRunFreeGuide_1.0.2.0.zip",
         "timestamp": "2026-10-05T14:45:49.5481024Z",

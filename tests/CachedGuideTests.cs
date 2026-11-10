@@ -16,7 +16,7 @@ public class CachedGuideTests {
    var manager=new Mock<IConfigurationManager>();manager.Setup(m=>m.GetConfiguration("livetv")).Returns(options);
    var paths=new Mock<IApplicationPaths>();paths.SetupGet(p=>p.DataPath).Returns(root);
    var tasks=new Mock<ITaskManager>();tasks.SetupGet(t=>t.ScheduledTasks).Returns([]);
-   var task=new DownloadTask(manager.Object,paths.Object,tasks.Object);
+   var task=new DownloadTask(manager.Object,paths.Object,tasks.Object,Mock.Of<MediaBrowser.Controller.LiveTv.IListingsManager>());
    await task.ExecuteAsync(new Progress<double>(),CancellationToken.None);
    manager.Verify(m=>m.SaveConfiguration("livetv",options),Times.Once);
    Assert.Equal(2,options.ListingProviders.Length);

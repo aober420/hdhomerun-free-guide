@@ -3,10 +3,11 @@ using System.Text.Json;
 using System.Xml;
 using System.Xml.Linq;
 using MediaBrowser.Common.Configuration;
+using MediaBrowser.Controller.LiveTv;
 using MediaBrowser.Model.LiveTv;
 using MediaBrowser.Model.Tasks;
 namespace FreeGuide;
-public sealed class DownloadTask(IConfigurationManager configuration, IApplicationPaths paths, ITaskManager tasks) : IScheduledTask {
+public sealed class DownloadTask(IConfigurationManager configuration, IApplicationPaths paths, ITaskManager tasks, IListingsManager listings) : IScheduledTask {
  private static readonly SemaphoreSlim Gate = new(1,1);
  public string Name => "Download HDHomeRun Free Guide";
  public string Key => "DownloadHDHomeRunFreeGuide";
@@ -22,15 +23,17 @@ public sealed class DownloadTask(IConfigurationManager configuration, IApplicati
  var options=configuration.GetConfiguration<LiveTvOptions>("livetv");
  if(File.Exists(guide)) {
   ValidateGuide(await File.ReadAllTextAsync(guide,cancellationToken));
-  if(RegisterGuide(options,guide)) QueueRefresh();
  }
- if(!force&&File.Exists(guide)&&File.Exists(schedule)&&DateTimeOffset.TryParse(await File.ReadAllTextAsync(schedule,cancellationToken),out var next)&&next>DateTimeOffset.UtcNow){progress.Report(100);return;}
+ if(!force&&File.Exists(guide)&&File.Exists(schedule)&&DateTimeOffset.TryParse(await File.ReadAllTextAsync(schedule,cancellationToken),out var next)&&next>DateTimeOffset.UtcNow){
+  if(RegisterGuide(options,guide)) QueueRefresh();
+  progress.Report(100);return;
+ }
  var urls=options.TunerHosts.Where(t=>string.Equals(t.Type,"hdhomerun",StringComparison.OrdinalIgnoreCase)).Select(t=>t.Url)
  .Concat((Plugin.Instance?.Configuration.TunerUrls??"").Split(',',StringSplitOptions.TrimEntries|StringSplitOptions.RemoveEmptyEntries)).Where(u=>!string.IsNullOrWhiteSpace(u)).Distinct().ToArray();
  if(urls.Length==0)throw new InvalidOperationException("Add an HDHomeRun tuner in Live TV or enter its address in plugin settings.");
  using var ownedClient=httpClient is null ? new HttpClient(new HttpClientHandler{AutomaticDecompression=DecompressionMethods.GZip|DecompressionMethods.Deflate}){Timeout=TimeSpan.FromMinutes(3)} : null;
  var client=httpClient??ownedClient!;
- client.DefaultRequestHeaders.UserAgent.ParseAdd("HDHomeRunFreeGuide/1.0.2");
+ client.DefaultRequestHeaders.UserAgent.ParseAdd("HDHomeRunFreeGuide/1.0.3");
  client.DefaultRequestHeaders.Accept.ParseAdd("*/*");
  var auths=new SortedDictionary<string,string>(StringComparer.OrdinalIgnoreCase);
  foreach(var raw in urls){
@@ -54,14 +57,18 @@ public sealed class DownloadTask(IConfigurationManager configuration, IApplicati
  progress.Report(70);
  var temporary=guide+".tmp";
  await File.WriteAllTextAsync(temporary,xml,cancellationToken);File.Move(temporary,guide,true);
+ // Use the current provider so channel mappings and tuner settings are preserved.
+ options=configuration.GetConfiguration<LiveTvOptions>("livetv");
  RegisterGuide(options,guide);
- QueueRefresh();
+ var provider=options.ListingProviders.First(p=>string.Equals(p.Type,"xmltv",StringComparison.OrdinalIgnoreCase)&&string.Equals(p.Path,guide,StringComparison.OrdinalIgnoreCase));
+ // Jellyfin clears this provider's disk and channel caches and queues a guide refresh.
+ await listings.SaveListingProvider(provider,false,false);
  await File.WriteAllTextAsync(schedule,DateTimeOffset.UtcNow.AddHours(20+Random.Shared.NextDouble()*8).ToString("O"),cancellationToken);
  progress.Report(100);
  }finally{Gate.Release();}
  }
  private bool RegisterGuide(LiveTvOptions options,string guide){
-  if(options.ListingProviders.Any(p=>string.Equals(p.Path,guide,StringComparison.OrdinalIgnoreCase)))return false;
+  if(options.ListingProviders.Any(p=>string.Equals(p.Type,"xmltv",StringComparison.OrdinalIgnoreCase)&&string.Equals(p.Path,guide,StringComparison.OrdinalIgnoreCase)))return false;
   options.ListingProviders=options.ListingProviders.Append(new ListingsProviderInfo{Id=Guid.NewGuid().ToString("N"),Type="xmltv",Path=guide,EnableAllTuners=false,EnabledTuners=options.TunerHosts.Where(t=>string.Equals(t.Type,"hdhomerun",StringComparison.OrdinalIgnoreCase)).Select(t=>t.Id).ToArray()}).ToArray();
   configuration.SaveConfiguration("livetv",options);return true;
  }

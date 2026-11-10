@@ -1,4 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-<PropertyGroup><TargetFramework>net10.0</TargetFramework><Nullable>enable</Nullable><ImplicitUsings>enable</ImplicitUsings><Version>1.0.2</Version><PackageLicenseExpression>GPL-3.0-only</PackageLicenseExpression></PropertyGroup>
+<PropertyGroup><TargetFramework>net10.0</TargetFramework><Nullable>enable</Nullable><ImplicitUsings>enable</ImplicitUsings><Version>1.0.3</Version><PackageLicenseExpression>GPL-3.0-only</PackageLicenseExpression></PropertyGroup>
 <ItemGroup><PackageReference Include="Jellyfin.Controller" Version="12.1.0" PrivateAssets="all"/><FrameworkReference Include="Microsoft.AspNetCore.App"/><EmbeddedResource Include="config.html"/></ItemGroup>
 </Project>

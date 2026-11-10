@@ -8,9 +8,9 @@ using Xunit;
 
 public class ForceDownloadTests {
  [Fact] public void ForceTaskHasNoAutomaticTriggers(){
-  var task=new ForceDownloadTask(null!,null!,null!);
+  var task=new ForceDownloadTask(null!,null!,null!,null!);
   Assert.Empty(task.GetDefaultTriggers());
-  Assert.NotEqual(new DownloadTask(null!,null!,null!).Key,task.Key);
+  Assert.NotEqual(new DownloadTask(null!,null!,null!,null!).Key,task.Key);
  }
  [Theory][InlineData(false)][InlineData(true)]
  public async Task ForceBypassesScheduleAndFailurePreservesPreviousGuide(bool fail){
@@ -27,7 +27,7 @@ public class ForceDownloadTests {
    var paths=new Mock<IApplicationPaths>();paths.SetupGet(p=>p.DataPath).Returns(root);
    var tasks=new Mock<ITaskManager>();tasks.SetupGet(t=>t.ScheduledTasks).Returns([]);
    var handler=new FakeGuideHandler(fail,fresh);using var client=new HttpClient(handler);
-   var task=new DownloadTask(manager.Object,paths.Object,tasks.Object);
+   var task=new DownloadTask(manager.Object,paths.Object,tasks.Object,Mock.Of<MediaBrowser.Controller.LiveTv.IListingsManager>());
    await task.ExecuteDownloadAsync(new Progress<double>(),CancellationToken.None,false,client);
    Assert.Equal(0,handler.Requests);
    if(fail){

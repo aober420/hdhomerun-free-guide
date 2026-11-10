@@ -2,7 +2,7 @@
 
 # HDHomeRun Free Guide
 
-A Jellyfin 12.1 plugin that downloads the free two-day HDHomeRun TV guide and keeps it updated. You'll need a physical HDHomeRun tuner. No SiliconDust account or subscription is needed.
+A Jellyfin 12.x plugin (12.1 or later) that downloads the free two-day HDHomeRun TV guide and keeps it updated. You'll need a physical HDHomeRun tuner. No SiliconDust account or subscription is needed.
 
 ## Installation
 
@@ -20,7 +20,7 @@ The plugin downloads the guide on startup and adds it to Live TV. After that, it
 
 If Jellyfin can't find your tuner, enter its address under **Plugins → HDHomeRun Free Guide**. Make sure it's also added under Live TV. Disable any other HDHomeRun guide plugin before using this one.
 
-Built for Jellyfin 12.1.
+Supports Jellyfin 12.1 and later compatible releases in the 12.x series.
 
 ## License
 

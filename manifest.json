@@ -9,7 +9,7 @@
         "timestamp": "2026-11-10T04:55:05.5634733Z",
         "checksum": "aafed9266c7e6a3a99b3dcdebf83e118",
         "targetAbi": "12.1.0.0",
-        "changelog": "## ⚙️ Improvements\n\n- **Fresh guide imports:** Both force downloads and scheduled downloads clear this guide provider's cache before Jellyfin imports the updated listings.\n\n## 🐛 Bug Fixes\n\n- **Outdated listings:** Resolved an issue where Jellyfin could reuse an older cached guide after a successful download, leaving new channels or programs missing."
+        "changelog": "## ⚙️ Improvements\n\n- **Fresh guide imports:** Force downloads and scheduled downloads now clear the cached guide so Jellyfin imports the latest listings.\n\n## 🐛 Bug Fixes\n\n- **Outdated listings:** Resolved an issue where Jellyfin could reuse an older cached guide after a successful download, leaving new channels or programs missing."
       },
       {
         "version": "1.0.2.0",
